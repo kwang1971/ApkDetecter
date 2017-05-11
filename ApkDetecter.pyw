@@ -27,12 +27,16 @@ class ApkDetecterForm(QtGui.QMainWindow):
         self._want_to_close = True
         self.dexheader = {}
         self.loadfile_path = ""
-        #self.unpackDir = tempfile.mktemp()
-        self.unpackDir = ur"c:\APK"
+        self.unpackDir = tempfile.mktemp()
+	print(self.unpackDir)
+        #changed for linux enviroment 
+        #self.unpackDir = ur"APK"
         isExists = os.path.exists(self.unpackDir)
-        if not isExists:
-            os.makedirs(ur"c:\APK")
 
+        #if not isExists:
+        #    os.makedirs(ur"APK")
+	if not isExists:
+             os.makedirs(self.unpackDir)
         self.ui = Ui_APKDetecter()
         self.ui.setupUi(self)
 
@@ -56,10 +60,11 @@ class ApkDetecterForm(QtGui.QMainWindow):
 
     def unzip(self, apkpath):
         apkpath = unicode(apkpath, "utf8")
-        cmd = "tool\\7z.exe x %s -y -o%s *.dex AndroidManifest.xml lib META-INF assets"
+        #cmd = "tool\\7z.exe x %s -y -o%s *.dex
+	cmd = "7z x %s -y -o%s *.dex AndroidManifest.xml lib META-INF assets"
         print cmd % (apkpath, self.unpackDir)
         self.ui.progressBar.setMaximum(29)
-        thread.start_new_thread(self.probar_thread, (3, 30))
+        #thread.start_new_thread(self.probar_thread, (3, 30))
         os.system(cmd % (apkpath, self.unpackDir))
 
 

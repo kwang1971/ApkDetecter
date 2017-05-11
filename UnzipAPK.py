@@ -83,10 +83,12 @@ class UnzipAPK():
 
 
     def dexdump(self):
-        cmd = 'tool\\dexdump.exe -d %s > %s'
+        #cmd = 'tool\\dexdump.exe -d %s > %s'
+        cmd = 'tool/dexdump -d %s > %s'
         dexpath = os.path.join(self.unpackDir, "classes.dex")
+	print(dexpath, self.unpackDir + os.path.sep +"classes.txt") 
         if os.path.exists(dexpath):
-            os.system(cmd % (dexpath, self.unpackDir + os.path.sep +"classes.txt"))
+        	os.system(cmd % (dexpath, self.unpackDir + os.path.sep +"classes.txt"))
 
     def getallname(self):
 
